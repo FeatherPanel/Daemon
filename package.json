@@ -5,9 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon src/index.ts --config nodemon.json",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "prepack": "npm run build",
+    "build": "tsc --outDir dist",
+    "start": "ts-node src/index.ts",
     "fpd": "ts-node src/scripts/fpd.ts"
   },
   "keywords": [
