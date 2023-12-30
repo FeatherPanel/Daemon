@@ -1,0 +1,8 @@
+{
+    "ssl": false,
+    "sftpPort": 2022,
+    "panelUrl": "http://127.0.0.1:8080",
+    "daemonToken": "45f02ac15b55af0f3b70add531c70b35cc22a9e3256d98dab8db6f1e93ea5209",
+    "nodeId": 1,
+    "ip": "109.13.70.204"
+}
