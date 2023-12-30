@@ -153,12 +153,9 @@ sftpServer.on("connection", (client, info) => {
 								filename: clientPath,
 								longname: getLongName(reqPath, stats),
 								attrs: {
+									...stats,
 									atime: stats.atimeMs,
-									gid: stats.gid,
-									mode: stats.mode,
 									mtime: stats.mtimeMs,
-									size: stats.size,
-									uid: stats.uid,
 								},
 							},
 						]);
@@ -221,12 +218,9 @@ sftpServer.on("connection", (client, info) => {
 								),
 								longname: getLongName(filePath, stats),
 								attrs: {
+									...stats,
 									atime: stats.atimeMs / 1000,
-									gid: stats.gid,
-									mode: stats.mode,
 									mtime: stats.mtimeMs / 1000,
-									size: stats.size,
-									uid: stats.uid,
 								},
 							};
 						});
@@ -545,6 +539,13 @@ sftpServer.on("connection", (client, info) => {
 									mtime: Date.now(),
 									size: link.length,
 									uid: 0,
+									isDirectory: () => false,
+									isFile: () => true,
+									isBlockDevice: () => false,
+									isCharacterDevice: () => false,
+									isSymbolicLink: () => false,
+									isFIFO: () => false,
+									isSocket: () => false,
 								},
 							},
 						]);
