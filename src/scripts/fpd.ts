@@ -2,8 +2,11 @@ import colors from "colors";
 import fs from "fs";
 import path from "path";
 
-import { FPD_COMMAND, VERSION } from "../constants";
+import pkg from "../../package.json";
 import { daemonConfig } from "./config";
+
+const FPD_COMMAND = process.platform === "win32" ? "fpd" : "./fpd";
+const VERSION = pkg.version;
 
 const commands: {
 	name: string;

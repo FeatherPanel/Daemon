@@ -5,9 +5,12 @@ import fetch from "node-fetch";
 import os from "os";
 import path from "path";
 
-import { API, FPD_COMMAND, IS_DEBUG } from "../constants";
 import { docker } from "../utils/docker";
 import logger from "../utils/logger";
+
+const FPD_COMMAND = process.platform === "win32" ? "fpd" : "./fpd";
+const IS_DEBUG =
+	process.env.NODE_ENV === "development" || process.argv.includes("--debug");
 
 export async function daemonConfig() {
 	let config: any = {};
@@ -100,7 +103,7 @@ export async function daemonConfig() {
 		daemonToken: daemonToken,
 	};
 
-	await fetch(`${API}/daemon/register`, {
+	await fetch(`${config.panelUrl + "/api/v1"}/daemon/register`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
