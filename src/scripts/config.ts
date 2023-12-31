@@ -6,8 +6,6 @@ import fetch from "node-fetch";
 import os from "os";
 import path from "path";
 
-import logger from "../utils/logger";
-
 const docker = new Docker({
 	socketPath:
 		(os.platform() === "linux" ? "/" : "//./pipe/") + "var/run/docker.sock",
@@ -31,7 +29,7 @@ export async function daemonConfig() {
 		.then((resp) => resp.json())
 		.then((resp: any) => [resp.query, resp.city + ", " + resp.country])
 		.catch((error: any) => {
-			if (IS_DEBUG) logger.debug("ERROR:", error);
+			if (IS_DEBUG) console.debug("ERROR:", error);
 			console.log(
 				colors.red(
 					"Impossible de récupérer votre adresse IP publique. Veuillez la rentrer manuellement."
@@ -177,7 +175,7 @@ export async function daemonConfig() {
 						)
 					);
 
-				if (IS_DEBUG) logger.debug("ERROR:", resp);
+				if (IS_DEBUG) console.debug("ERROR:", resp);
 				console.log();
 				process.exit(1);
 			}
@@ -189,27 +187,29 @@ export async function daemonConfig() {
 				)
 			);
 
-			if (IS_DEBUG) logger.debug("ERROR:", error);
+			if (IS_DEBUG) console.debug("ERROR:", error);
 			console.log();
 			process.exit(1);
 		});
 }
 
 export async function checkDocker() {
-	logger.debug("Checking Docker connection...");
+	console.debug("Checking Docker connection...");
 
 	try {
 		await docker.info();
 		await docker.listContainers({ all: true });
 	} catch (error) {
-		logger.error(
+		console.error(
 			"Une erreur est survenue lors de la tentative de connexion à Docker."
+				.red
 		);
-		logger.error(
+		console.error(
 			"Vérifiez que Docker est lancé ou essayez de relancer le daemon avec les permissions administrateur."
+				.red
 		);
 
-		if (IS_DEBUG) logger.debug("ERROR:", error);
+		if (IS_DEBUG) console.debug("ERROR:", error);
 		console.log();
 		process.exit(1);
 	}
