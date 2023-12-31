@@ -5,8 +5,10 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon src/index.ts --config nodemon.json",
-    "build": "tsc --outDir dist",
     "start": "ts-node src/index.ts",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles LICENSE package.json fpd.bat fpd dist/ && rimraf dist/config.json",
+    "build": "npm run clean && tsc -p . --outDir dist && npm run copy-files",
     "fpd": "node src/scripts/fpd.js",
     "fpd:dev": "ts-node src/scripts/fpd.ts"
   },
@@ -33,9 +35,11 @@
     "@types/serve-static": "^1.15.2",
     "@types/ssh2": "^1.11.18",
     "@types/tar": "^6.1.10",
+    "copyfiles": "^2.4.1",
     "nexe": "4.0.0-rc.3",
     "nodemon": "^3.0.2",
     "pkg": "^5.8.1",
+    "rimraf": "^5.0.5",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
