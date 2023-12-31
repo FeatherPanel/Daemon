@@ -1,12 +1,17 @@
 import colors from "colors";
+import Docker from "dockerode";
 import { Confirm, Input, NumberPrompt } from "enquirer";
 import fs from "fs";
 import fetch from "node-fetch";
 import os from "os";
 import path from "path";
 
-import { docker } from "../utils/docker";
 import logger from "../utils/logger";
+
+const docker = new Docker({
+	socketPath:
+		(os.platform() === "linux" ? "/" : "//./pipe/") + "var/run/docker.sock",
+});
 
 const FPD_COMMAND = process.platform === "win32" ? "fpd" : "./fpd";
 const IS_DEBUG =
