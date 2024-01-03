@@ -53,6 +53,7 @@ if (!fs.existsSync(path.join(__dirname, "..", "config.json"))) {
 			body: JSON.stringify({
 				id: config.nodeId,
 				ssl: config.ssl,
+				sftpPort: config.sftpPort,
 			}),
 		})
 			.then((res) => res.json())

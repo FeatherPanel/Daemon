@@ -100,7 +100,7 @@ export async function daemonConfig() {
 
 	config = {
 		dockerExec: config.dockerExec,
-		sfptPort: sftpPort,
+		sftpPort: sftpPort,
 		ssl: useSSL,
 		panelUrl: panelUrl,
 		daemonToken: daemonToken,
@@ -115,7 +115,8 @@ export async function daemonConfig() {
 		body: JSON.stringify({
 			name: name,
 			address: ip,
-			port: "1024",
+			daemonPort: 1024,
+			sftpPort: config.sftpPort,
 			location: location,
 			ssl: config.ssl,
 		}),
