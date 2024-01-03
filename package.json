@@ -7,7 +7,7 @@
     "dev": "nodemon src/index.ts --config nodemon.json",
     "start": "ts-node src/index.ts",
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles LICENSE package.json fpd.bat fpd dist/ && rimraf dist/config.json",
+    "copy-files": "copyfiles LICENSE.md package.json fpd.bat fpd dist/ && rimraf dist/config.json",
     "build": "npm run clean && node esbuild.js && npm run copy-files",
     "fpd": "node src/scripts/fpd.js",
     "fpd:dev": "ts-node src/scripts/fpd.ts"
