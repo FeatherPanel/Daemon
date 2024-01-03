@@ -8,7 +8,7 @@
     "start": "ts-node src/index.ts",
     "clean": "rimraf dist/",
     "copy-files": "copyfiles LICENSE package.json fpd.bat fpd dist/ && rimraf dist/config.json",
-    "build": "npm run clean && tsc -p . --outDir dist && npm run copy-files",
+    "build": "npm run clean && node esbuild.js && npm run copy-files",
     "fpd": "node src/scripts/fpd.js",
     "fpd:dev": "ts-node src/scripts/fpd.ts"
   },
@@ -36,6 +36,7 @@
     "@types/ssh2": "^1.11.18",
     "@types/tar": "^6.1.10",
     "copyfiles": "^2.4.1",
+    "esbuild": "^0.19.11",
     "nexe": "4.0.0-rc.3",
     "nodemon": "^3.0.2",
     "pkg": "^5.8.1",
