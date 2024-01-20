@@ -209,7 +209,6 @@ export async function checkDocker() {
 			"Vérifiez que Docker est lancé ou essayez de relancer le daemon avec les permissions administrateur."
 				.red
 		);
-		console.error("\r\nsudo " + FPD_COMMAND);
 
 		if (IS_DEBUG) console.debug("ERROR:", error);
 		console.log();
